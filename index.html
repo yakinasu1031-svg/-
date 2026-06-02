@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>肩たたき券</title>
+
+<style>
+body{
+  margin:0;
+  font-family:sans-serif;
+  background:#06c755;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+.card{
+  background:white;
+  width:90%;
+  max-width:350px;
+  border-radius:20px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+
+.gift{
+  font-size:60px;
+}
+
+.count{
+  font-size:48px;
+  font-weight:bold;
+  color:#06c755;
+  margin:20px 0;
+}
+
+button{
+  background:#06c755;
+  color:white;
+  border:none;
+  padding:15px 30px;
+  border-radius:50px;
+  font-size:18px;
+}
+
+.used{
+  color:red;
+  font-weight:bold;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="gift">🎁</div>
+
+  <h1>肩たたき券</h1>
+
+  <p>残り回数</p>
+
+  <div id="count" class="count">5</div>
+
+  <button onclick="useTicket()">
+    使用する
+  </button>
+
+  <div id="msg"></div>
+</div>
+
+<script>
+
+let count = localStorage.getItem("katatataki");
+
+if(count === null){
+  count = 5;
+}else{
+  count = Number(count);
+}
+
+update();
+
+function useTicket(){
+
+  if(count <= 0) return;
+
+  count--;
+
+  localStorage.setItem(
+    "katatataki",
+    count
+  );
+
+  update();
+}
+
+function update(){
+
+  document.getElementById("count").textContent = count;
+
+  if(count===0){
+    document.getElementById("msg").innerHTML =
+      '<div class="used">使用済みです</div>';
+  }
+}
+
+</script>
+
+</body>
+</html>
