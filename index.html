@@ -68,7 +68,9 @@ button{
   <button onclick="useTicket()">
     使用する
   </button>
-
+<button onclick="adminAdd()">
+  管理者：+5回
+</button>
   <div id="msg"></div>
 </div>
 
@@ -107,7 +109,22 @@ function update(){
       '<div class="used">使用済みです</div>';
   }
 }
+function adminAdd(){
+  const pass = prompt("パスワード");
 
+  if(pass !== "1234"){
+    return;
+  }
+
+  count += 5;
+
+  localStorage.setItem(
+    "katatataki",
+    count
+  );
+
+  update();
+}
 </script>
 
 </body>
